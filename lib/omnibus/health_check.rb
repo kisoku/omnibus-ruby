@@ -32,6 +32,7 @@ module Omnibus
                       /librt\.so/,
                       /libstdc\+\+\.so/,
                       /libutil\.so/,
+                      /libuuid\.so/,
                       /linux-vdso.+/,
                       /linux-gate\.so/,
                      ]
