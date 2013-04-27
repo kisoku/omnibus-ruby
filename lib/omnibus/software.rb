@@ -147,7 +147,9 @@ module Omnibus
     #   set.
     def source(val=NULL_ARG)
       @source = val unless val.equal?(NULL_ARG)
-      @source || raise(MissingSoftwareConfiguration.new("source", ':url => "http://mysoftware.org/mysoftware-#{version}.tar.gz", :md5 => "..."'))
+      # XXX can't do this yet
+      #@source || raise(MissingSoftwareConfiguration.new("source", ':url => "http://mysoftware.org/mysoftware-#{version}.tar.gz", :md5 => "..."', @dsl_file))
+      @source 
     end
 
     # Set a version from a software descriptor file, or receive the
@@ -155,7 +157,7 @@ module Omnibus
     # (if set)
     def version(val=NULL_ARG)
       @given_version = val unless val.equal?(NULL_ARG)
-      @override_version || @given_version || raise(MissingSoftwareConfiguration.new("version", "1.0.0"))
+      @override_version || @given_version || raise(MissingSoftwareConfiguration.new("version", "1.0.0"), @dsl_file)
     end
 
     # Was this software version overridden externally, relative to the
