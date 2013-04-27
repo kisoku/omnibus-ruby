@@ -55,6 +55,7 @@ module Omnibus
       @conflicts = Array.new
       @dependencies = Array.new
       @runtime_dependencies = Array.new
+      @dsl_file = filename
       instance_eval(io)
       validate
       render_tasks
@@ -82,7 +83,7 @@ module Omnibus
     #   must be set in order to build a project)
     def name(val=NULL_ARG)
       @name = val unless val.equal?(NULL_ARG)
-      @name || raise(MissingProjectConfiguration.new("name", "my_project"))
+      @name || raise(MissingProjectConfiguration.new("name", "my_project", @dsl_file))
     end
 
     # Set or retrieve the package name of the project.  Unless
@@ -106,7 +107,7 @@ module Omnibus
     #   must be set in order to build a project)
     def install_path(val=NULL_ARG)
       @install_path = val unless val.equal?(NULL_ARG)
-      @install_path || raise(MissingProjectConfiguration.new("install_path", "/opt/opscode"))
+      @install_path || raise(MissingProjectConfiguration.new("install_path", "/opt/opscode", @dsl_file))
     end
 
     # Set or retrieve the the package maintainer.
@@ -119,7 +120,7 @@ module Omnibus
     #   be set in order to build a project)
     def maintainer(val=NULL_ARG)
       @maintainer = val unless val.equal?(NULL_ARG)
-      @maintainer || raise(MissingProjectConfiguration.new("maintainer", "Opscode, Inc."))
+      @maintainer || raise(MissingProjectConfiguration.new("maintainer", "Opscode, Inc.", @dsl_file))
     end
 
     # Set or retrive the package homepage.
@@ -132,7 +133,7 @@ module Omnibus
     #   set in order to build a project)
     def homepage(val=NULL_ARG)
       @homepage = val unless val.equal?(NULL_ARG)
-      @homepage || raise(MissingProjectConfiguration.new("homepage", "http://www.opscode.com"))
+      @homepage || raise(MissingProjectConfiguration.new("homepage", "http://www.opscode.com", @dsl_file))
     end
 
     # Defines the iteration for the package to be generated.  Adheres

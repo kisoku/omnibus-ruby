@@ -77,7 +77,7 @@ module Omnibus
       @source           = nil
       @relative_path    = nil
       @source_uri       = nil
-      @source_config    = filename
+      @dsl_file         = filename
       @project          = project
       @always_build     = false
 
@@ -100,7 +100,7 @@ module Omnibus
 
     def name(val=NULL_ARG)
       @name = val unless val.equal?(NULL_ARG)
-      @name || raise(MissingSoftwareConfiguration.new("name", "my_software"))
+      @name || raise(MissingSoftwareConfiguration.new("name", "my_software", @dsl_file))
     end
 
     def description(val)
@@ -422,7 +422,7 @@ module Omnibus
         file fetch_file => "#{name}:fetch" 
         file manifest_file => "#{name}:build"
 
-        file fetch_file => (file @source_config)
+        file fetch_file => (file @dsl_file)
         file manifest_file => (file fetch_file)
 
         desc "fetch and build #{@name} for #{@project.name}"

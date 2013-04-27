@@ -35,14 +35,14 @@ module Omnibus
   # Raise this error if a needed Project configuration value has not
   # been set.
   class MissingProjectConfiguration < RuntimeError
-    def initialize(parameter_name, sample_value)
-      @parameter_name, @sample_value = parameter_name, sample_value
+    def initialize(parameter_name, sample_value, dsl_file)
+      @parameter_name, @sample_value, @dsl_file = parameter_name, sample_value, dsl_file
     end
 
     def to_s
       """
       You are attempting to build a project, but have not specified
-      a value for '#{@parameter_name}'!
+      a value for '#{@parameter_name}' in '#{@dsl_file}'!
 
       Please add code similar to the following to your project DSL file:
 
@@ -53,14 +53,14 @@ module Omnibus
   end
 
   class MissingSoftwareConfiguration < RuntimeError
-    def initialize(parameter_name, sample_value)
-      @parameter_name, @sample_value = parameter_name, sample_value
+    def initialize(parameter_name, sample_value, dsl_file)
+      @parameter_name, @sample_value, @dsl_file = parameter_name, sample_value, dsl_file
     end
 
     def to_s
       """
       You are attempting to build software, but have not specified
-      a value for '#{@parameter_name}'!
+      a value for '#{@parameter_name}' in '#{@dsl_file}'!
 
       Please add code similar to the following to your software DSL file:
 
