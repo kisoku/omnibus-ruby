@@ -86,10 +86,10 @@ module Omnibus
                          ]
 
     WHITELIST_FILES = [
-                       /jre\/bin\/javaws/,
-                       /jre\/bin\/policytool/,
-                       /jre\/lib/,
-                       /jre\/plugin/,
+                       /j(dk|re)\/bin\/javaws/,
+                       /j(dk|re)\/bin\/policytool/,
+                       /j(dk|re)\/lib/,
+                       /j(dk|re)\/plugin/,
                       ]
 
     def self.log(msg)
