@@ -87,15 +87,20 @@ module Omnibus
       @dependencies = Array.new
       instance_eval(io, filename, 0)
 
+      validate
       # Set override information after the DSL file has been consumed
       @override_version = overrides[name]
       
       render_tasks
     end
 
+    def validate
+      name && version
+    end
+
     def name(val=NULL_ARG)
       @name = val unless val.equal?(NULL_ARG)
-      @name
+      @name || raise(MissingSoftwareConfiguration.new("name", "my_software"))
     end
 
     def description(val)
@@ -142,7 +147,7 @@ module Omnibus
     #   set.
     def source(val=NULL_ARG)
       @source = val unless val.equal?(NULL_ARG)
-      @source
+      @source || raise(MissingSoftwareConfiguration.new("source", ':url => "http://mysoftware.org/mysoftware-#{version}.tar.gz", :md5 => "..."'))
     end
 
     # Set a version from a software descriptor file, or receive the
@@ -150,7 +155,7 @@ module Omnibus
     # (if set)
     def version(val=NULL_ARG)
       @given_version = val unless val.equal?(NULL_ARG)
-      @override_version || @given_version
+      @override_version || @given_version || raise(MissingSoftwareConfiguration.new("version", "1.0.0"))
     end
 
     # Was this software version overridden externally, relative to the
