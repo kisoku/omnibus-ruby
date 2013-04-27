@@ -157,7 +157,8 @@ module Omnibus
     # (if set)
     def version(val=NULL_ARG)
       @given_version = val unless val.equal?(NULL_ARG)
-      @override_version || @given_version || raise(MissingSoftwareConfiguration.new("version", "1.0.0"), @dsl_file)
+      # @override_version || @given_version || raise(MissingSoftwareConfiguration.new("version", "1.0.0", @dsl_file))
+      @override_version || @given_version 
     end
 
     # Was this software version overridden externally, relative to the
