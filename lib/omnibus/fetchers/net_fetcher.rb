@@ -174,7 +174,7 @@ E
       if project_file.end_with?(".gz") || project_file.end_with?(".tgz")
         "gzip -dc  #{project_file} | ( cd #{source_dir} && tar -xf - )"
       elsif project_file.end_with?(".tar")
-        "tar -zf #{project_file}"
+        "tar -xf #{project_file}"
       elsif project_file.end_with?(".bz2")
         "bzip2 -dc  #{project_file} | ( cd #{source_dir} && tar -xf - )"
       elsif project_file.end_with?(".7z")
